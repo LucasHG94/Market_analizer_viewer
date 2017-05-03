@@ -1,0 +1,34 @@
+
+.main-header .logo {
+    background-color: #2b3b42;
+    color: #ffffff;
+    border-bottom: 0 solid transparent;
+}
+
+.main-header .navbar {
+    background-color: #222d31;
+    height: 50px;
+}
+
+li.user-header {
+    background: #2b3b42 !important;
+}
+
+.passBox {
+    padding: 10px;
+}
+
+@media (max-width: 767px) {
+    /*.main-header .logo,*/
+    .main-header .navbar {
+        width: auto;
+        float: none !important;
+        z-index: -1 !important;
+    }
+
+    .main-header .logo {
+        width: fit-content !important;
+        float: left;
+        z-index: -1 !important;
+    }
+}
