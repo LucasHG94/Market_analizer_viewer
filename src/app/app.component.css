@@ -1,0 +1,16 @@
+.content {
+    min-height: calc(100vh - 81px);
+    padding: 0px;
+    display: flex;
+}
+
+.content /deep/ > :not(router-outlet) {
+    flex-grow: 1;
+}
+
+.main-footer {
+    background: #eee;
+    padding: 0.5rem;
+    color: #444;
+    border-top: 1px solid #d2d6de;
+}
