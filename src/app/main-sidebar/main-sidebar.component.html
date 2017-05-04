@@ -9,7 +9,9 @@
         </a>
         <ul class="treeview-menu menu-open" style="display: block;">
           <li *ngFor="let company of companies">
-            <a href="#"><i class="fa fa-circle-o"></i>{{company.name}}</a>
+            <a [routerLink]="['/company', company.id]" routerLinkActive="active">
+              <i class="fa fa-circle-o"></i>{{company.name}}
+            </a>
           </li>
         </ul>
       </li>

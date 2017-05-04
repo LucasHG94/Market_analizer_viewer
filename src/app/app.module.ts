@@ -5,22 +5,26 @@ import { FormsModule }   from '@angular/forms'; // <-- NgModel lives here
 import { AppComponent }  from './app.component';
 import {MainHeaderComponent} from './main-header/main-header.component';
 import {MainSidebarComponent} from './main-sidebar/main-sidebar.component';
-import {CommonModule} from "@angular/common";
-import {HttpModule, JsonpModule} from "@angular/http";
-import {ProxyService} from "./proxy.service";
+import {CompanyComponent} from './+company/company.component';
+import {CommonModule} from '@angular/common';
+import {HttpModule, JsonpModule} from '@angular/http';
+import {ProxyService} from './proxy.service';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainHeaderComponent,
     MainSidebarComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    AppRoutingModule
   ],
   providers: [
     ProxyService,
