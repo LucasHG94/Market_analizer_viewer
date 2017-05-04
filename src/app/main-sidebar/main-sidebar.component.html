@@ -1,27 +1,15 @@
 <aside class="main-sidebar">
   <!-- Inner sidebar -->
-  <div class="sidebar">
+  <div *ngIf="companies" class="sidebar">
     <ul class="sidebar-menu">
       <li class="header">Gráficos</li>
-      <li>
-        <a>
+      <li class="treeview">
+        <a href="#">
           <i class="fa fa-industry"></i> <span>IBEX 34</span>
         </a>
-        <ul class="treeview-menu" style="display: block;">
-          <li>
-            <a>
-              <i class="fa fa-circle-o"></i>BBVA
-            </a>
-          </li>
-          <li>
-            <a>
-              <i class="fa fa-circle-o"></i>Santander
-            </a>
-          </li>
-          <li>
-            <a>
-              <i class="fa fa-circle-o"></i>Telefónica
-            </a>
+        <ul class="treeview-menu menu-open" style="display: block;">
+          <li *ngFor="let company of companies">
+            <a href="#"><i class="fa fa-circle-o"></i>{{company.name}}</a>
           </li>
         </ul>
       </li>
