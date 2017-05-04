@@ -3,10 +3,16 @@
     display: block;
 }
 
-@media (max-width: 767px) {
-    .main-sidebar {
-        padding-top: 50px !important;
-    }
+.main-sidebar {
+    padding-top: 0px !important;
+}
+
+.header {
+    background-color: #2b3b42 !important;
+    color: #ffffff !important;
+    height: 50px;
+    font-size: 18px !important;
+    padding: 12px 25px 10px 40px !important;
 }
 
 .treeview-no-dropdown {
