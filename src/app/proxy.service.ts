@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {Company, Response} from './model';
+import {CompanyRaw, DailyDataRaw, Response} from './model';
 
 
 @Injectable()
 export class ProxyService {
 
-  url = 'http://0.0.0.0:5000/companies';
+  url = 'http://0.0.0.0:5000/';
 
   static buildRejectMessage(response: Response) {
     console.error(response);
@@ -19,17 +19,30 @@ export class ProxyService {
     return Promise.reject(error.message || error);
   }
 
-  getCompanies(): Promise<Company[]> {
-    return this.http.get(this.url)
-      .toPromise()
-      .then(response => {
-        let res: Response = response.json();
-        if (res.success) {
-          return res.data as Company[];
-        } else {
-          return ProxyService.buildRejectMessage(res);
-        }
-      }).catch(this.handleError);
+  getCompanies(): Promise<CompanyRaw[]> {
+    return this.http.get(this.url + 'getCompanies')
+        .toPromise()
+        .then(response => {
+          let res: Response = response.json();
+          if (res.success) {
+            return res.data as CompanyRaw[];
+          } else {
+            return ProxyService.buildRejectMessage(res);
+          }
+        }).catch(this.handleError);
+  }
+
+  getCompanyData(companyId: number): Promise<CompanyRaw> {
+    return this.http.get(this.url + 'getCompanyData/' + companyId)
+        .toPromise()
+        .then(response => {
+          let res: Response = response.json();
+          if (res.success) {
+            return res.data as CompanyRaw;
+          } else {
+            return ProxyService.buildRejectMessage(res);
+          }
+        }).catch(this.handleError);
   }
 
 }
