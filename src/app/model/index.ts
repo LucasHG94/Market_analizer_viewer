@@ -1,4 +1,6 @@
 
+import 'rxjs/add/operator/map';
+
 export interface Response {
   success: boolean;
   errCode?: number;
@@ -10,22 +12,96 @@ export interface Error {
   message: string;
 }
 
+export interface StateBonusRaw {
+  date: number;
+  state_bonus: number;
+  variation: number;
+}
+
+export class StateBonus {
+  date: number;
+  state_bonus: number;
+  variation: number;
+
+  static fromRaw(raw: StateBonusRaw) {
+    let instance = new StateBonus();
+    instance.date = raw.date;
+    instance.state_bonus = raw.state_bonus;
+    instance.variation = raw.variation;
+  }
+}
+
 export interface CompanyRaw {
   id: number;
   name: string;
-  dailyData: string;
+  dailyData: DailyDataRaw[];
 }
 
-export class Company implements CompanyRaw{
+export class Company {
   id: number;
   name: string;
-  dailyData: string;
+  dailyData: DailyData[];
 
   static fromRaw(raw: CompanyRaw) {
     let instance = new Company();
     instance.id = raw.id;
     instance.name = raw.name;
-    instance.dailyData = raw.dailyData;
+    if (raw.dailyData){
+      instance.dailyData = raw.dailyData.map(DailyData.fromRaw);
+    }
+    return instance;
+  }
+}
+
+export interface DailyDataRaw {
+  date: string;
+  companyId: number;
+  company: number;
+  price: number;
+  difference: number;
+  percentageDifference: number;
+  capitalization: number;
+  BPA: number;
+  PER: number;
+  PVC: number;
+  PCF: number;
+  dividendYield: number;
+  interestPerShare: number;
+  lastValue: number;
+}
+
+export class DailyData {
+  date: Date;
+  companyId: number;
+  company: number;
+  price: number;
+  difference: number;
+  percentageDifference: number;
+  capitalization: number;
+  BPA: number;
+  PER: number;
+  PVC: number;
+  PCF: number;
+  dividendYield: number;
+  interestPerShare: number;
+  lastValue: number;
+
+  static fromRaw(raw: DailyDataRaw) {
+    let instance = new DailyData();
+    instance.date = new Date(raw.date);
+    instance.companyId = raw.companyId;
+    instance.company = raw.company;
+    instance.price = raw.price;
+    instance.difference = raw.difference;
+    instance.percentageDifference = raw.percentageDifference;
+    instance.capitalization = raw.capitalization;
+    instance.BPA = raw.BPA;
+    instance.PER = raw.PER;
+    instance.PVC = raw.PVC;
+    instance.PCF = raw.PCF;
+    instance.dividendYield = raw.dividendYield;
+    instance.interestPerShare = raw.interestPerShare;
+    instance.lastValue = raw.lastValue;
     return instance;
   }
 }

@@ -18,6 +18,10 @@ export class CompanyComponent {
     this.routeSub = this.route.params.subscribe(params => {
       let companyId = +params['companyId'];
       console.log(companyId);
+      this.proxyService.getCompanyData(companyId).then(company => {
+        this.company = Company.fromRaw(company);
+        console.log(this.company);
+      });
     });
   }
 }
