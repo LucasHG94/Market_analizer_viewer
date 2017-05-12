@@ -21,6 +21,12 @@
     display: block;
 }
 
+.main-sidebar {;
+    height: 100px;
+    overflow:hidden;
+    overflow-y:scroll;
+}
+
 .sidebar-menu li > a > .pull-right {
     position: relative;
     right: 10px;
