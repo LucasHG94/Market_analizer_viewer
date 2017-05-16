@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {CompanyRaw, DailyDataRaw, Response} from './model';
+import {CompanyRaw, DailyDataRaw, Response, StateBonusRaw} from './model';
 
 
 @Injectable()
@@ -19,18 +19,44 @@ export class ProxyService {
     return Promise.reject(error.message || error);
   }
 
-  getCompanies(): Promise<CompanyRaw[]> {
-    return this.http.get(this.url + 'getCompanies')
-        .toPromise()
-        .then(response => {
-          let res: Response = response.json();
-          if (res.success) {
-            return res.data as CompanyRaw[];
-          } else {
-            return ProxyService.buildRejectMessage(res);
-          }
-        }).catch(this.handleError);
-  }
+    getStateBonus(): Promise<StateBonusRaw[]> {
+        return this.http.get(this.url + 'getStateBonus')
+            .toPromise()
+            .then(response => {
+                let res: Response = response.json();
+                if (res.success) {
+                    return res.data as StateBonusRaw[];
+                } else {
+                    return ProxyService.buildRejectMessage(res);
+                }
+            }).catch(this.handleError);
+    }
+
+    getCompanies(): Promise<CompanyRaw[]> {
+        return this.http.get(this.url + 'getCompanies')
+            .toPromise()
+            .then(response => {
+                let res: Response = response.json();
+                if (res.success) {
+                    return res.data as CompanyRaw[];
+                } else {
+                    return ProxyService.buildRejectMessage(res);
+                }
+            }).catch(this.handleError);
+    }
+
+    getIBEX35Companies(): Promise<CompanyRaw[]> {
+        return this.http.get(this.url + 'getIBEX35Companies')
+            .toPromise()
+            .then(response => {
+                let res: Response = response.json();
+                if (res.success) {
+                    return res.data as CompanyRaw[];
+                } else {
+                    return ProxyService.buildRejectMessage(res);
+                }
+            }).catch(this.handleError);
+    }
 
   getCompanyData(companyId: number): Promise<CompanyRaw> {
     return this.http.get(this.url + 'getCompanyData/' + companyId)

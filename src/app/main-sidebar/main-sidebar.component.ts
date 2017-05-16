@@ -11,11 +11,17 @@ import {Company} from "../model/index";
 })
 export class MainSidebarComponent {
 
-  companies: Company[];
+  IBEX35: Company[];
+  BME: Company[];
   constructor (private proxyService: ProxyService) {
+    this.IBEX35 = [];
     this.proxyService.getCompanies().then(companies => {
-      this.companies = companies.map(Company.fromRaw);
-      console.log(this.companies);
+      this.BME = companies.map(Company.fromRaw);
+      for (let company of this.BME){
+        if (company.marketType === 'IBEX35') {
+          this.IBEX35.push(company);
+        }
+      }
     });
   }
 }

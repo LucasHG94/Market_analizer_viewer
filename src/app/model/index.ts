@@ -14,19 +14,19 @@ export interface Error {
 
 export interface StateBonusRaw {
   date: number;
-  state_bonus: number;
+  stateBonus: number;
   variation: number;
 }
 
 export class StateBonus {
   date: number;
-  state_bonus: number;
+  stateBonus: number;
   variation: number;
 
   static fromRaw(raw: StateBonusRaw) {
     let instance = new StateBonus();
     instance.date = raw.date;
-    instance.state_bonus = raw.state_bonus;
+    instance.stateBonus = raw.stateBonus;
     instance.variation = raw.variation;
   }
 }
@@ -34,19 +34,22 @@ export class StateBonus {
 export interface CompanyRaw {
   id: number;
   name: string;
+  marketType: string;
   dailyData: DailyDataRaw[];
 }
 
 export class Company {
   id: number;
   name: string;
+  marketType: string;
   dailyData: DailyData[];
 
   static fromRaw(raw: CompanyRaw) {
     let instance = new Company();
     instance.id = raw.id;
     instance.name = raw.name;
-    if (raw.dailyData){
+    instance.marketType = raw.marketType;
+    if (raw.dailyData) {
       instance.dailyData = raw.dailyData.map(DailyData.fromRaw);
     }
     return instance;

@@ -1,14 +1,26 @@
 <aside class="main-sidebar">
   <!-- Inner sidebar -->
-  <div *ngIf="companies" class="sidebar">
+  <div class="sidebar">
     <ul class="sidebar-menu">
       <li class="header"><b>M</b>arket <b>A</b>nalizer</li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-industry"></i> <span>Bolsa Española</span>
+          <i class="fa fa-line-chart"></i> <span>IBEX 35</span>
         </a>
-        <ul class="treeview-menu menu-open" style="display: block;">
-          <li *ngFor="let company of companies">
+        <ul *ngIf="IBEX35" class="treeview-menu" style="display: block;">
+          <li *ngFor="let company of IBEX35">
+            <a [routerLink]="['/company', company.id]" routerLinkActive="active">
+              <i class="fa fa-circle-o"></i>{{company.name}}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-line-chart"></i> <span>Bolsa Española</span>
+        </a>
+        <ul *ngIf="BME" class="treeview-menu" style="display: block;">
+          <li *ngFor="let company of BME">
             <a [routerLink]="['/company', company.id]" routerLinkActive="active">
               <i class="fa fa-circle-o"></i>{{company.name}}
             </a>
