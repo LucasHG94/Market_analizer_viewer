@@ -1,5 +1,7 @@
 node_modules*
 .idea*
-src/assets*
 *.js
 *.js.map
+!src/assets/**/*.js
+!src/assets/**/*.js.map
+*.log
