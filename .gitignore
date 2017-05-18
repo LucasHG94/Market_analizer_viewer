@@ -1,7 +1,7 @@
 node_modules*
 .idea*
-*.js
-*.js.map
+src/app/**/*.js
+src/app/**/*.js.map
 !src/assets/**/*.js
 !src/assets/**/*.js.map
 *.log
