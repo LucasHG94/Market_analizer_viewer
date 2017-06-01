@@ -12,9 +12,7 @@ export class ProxyService {
   constructor (private http: Http, @Inject('AppConfig') private appConfig: AppConfig) {}
 
   private get URL(): string {
-    let url = 'http://' + this.appConfig.host + ':' + this.appConfig.port + '/';
-    console.log(url);
-    return url;
+    return 'http://' + this.appConfig.host + ':' + this.appConfig.port + '/';
   }
 
 
