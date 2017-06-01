@@ -5,3 +5,4 @@ src/app/**/*.js.map
 !src/assets/**/*.js
 !src/assets/**/*.js.map
 *.log
+src/app/config/app.config.ts
