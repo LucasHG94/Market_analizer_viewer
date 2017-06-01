@@ -1,18 +1,22 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {CompanyRaw, DailyDataRaw, Response, StateBonusRaw} from './model';
-
+import {AppConfig, CompanyRaw, Response, StateBonusRaw} from './model/index';
 
 @Injectable()
 export class ProxyService {
-
-  url = 'http://0.0.0.0:5000/';
 
   static buildRejectMessage(response: Response) {
     console.error(response);
     return '[ERROR] errCode: ' + response.errCode + ', message: ' + response.data;
   }
-  constructor (private http: Http) {}
+  constructor (private http: Http, @Inject('AppConfig') private appConfig: AppConfig) {}
+
+  private get URL(): string {
+    let url = 'http://' + this.appConfig.host + ':' + this.appConfig.port + '/';
+    console.log(url);
+    return url;
+  }
+
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
@@ -20,7 +24,7 @@ export class ProxyService {
   }
 
     getStateBonus(): Promise<StateBonusRaw[]> {
-        return this.http.get(this.url + 'getStateBonus')
+        return this.http.get(this.URL + 'getStateBonus')
             .toPromise()
             .then(response => {
                 let res: Response = response.json();
@@ -33,7 +37,7 @@ export class ProxyService {
     }
 
     getCompanies(): Promise<CompanyRaw[]> {
-        return this.http.get(this.url + 'getCompanies')
+        return this.http.get(this.URL + 'getCompanies')
             .toPromise()
             .then(response => {
                 let res: Response = response.json();
@@ -46,7 +50,7 @@ export class ProxyService {
     }
 
     getIBEX35Companies(): Promise<CompanyRaw[]> {
-        return this.http.get(this.url + 'getIBEX35Companies')
+        return this.http.get(this.URL + 'getIBEX35Companies')
             .toPromise()
             .then(response => {
                 let res: Response = response.json();
@@ -59,7 +63,7 @@ export class ProxyService {
     }
 
   getCompanyData(companyId: number): Promise<CompanyRaw> {
-    return this.http.get(this.url + 'getCompanyData/' + companyId)
+    return this.http.get(this.URL + 'getCompanyData/' + companyId)
         .toPromise()
         .then(response => {
           let res: Response = response.json();

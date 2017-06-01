@@ -10,6 +10,8 @@ import {CommonModule} from '@angular/common';
 import {HttpModule, JsonpModule} from '@angular/http';
 import {ProxyService} from './proxy.service';
 import {AppRoutingModule} from './app-routing.module';
+import {AppConfig} from './model/index';
+import {appConfig} from './config/app.config';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {AppRoutingModule} from './app-routing.module';
     AppRoutingModule
   ],
   providers: [
+    {provide: 'AppConfig', useValue: AppConfig.fromRaw(appConfig)},
     ProxyService,
   ],
   bootstrap: [ AppComponent ]
