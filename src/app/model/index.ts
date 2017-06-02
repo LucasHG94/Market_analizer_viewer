@@ -37,21 +37,22 @@ export interface Error {
 }
 
 export interface StateBonusRaw {
-  date: number;
+  date: string;
   stateBonus: number;
   variation: number;
 }
 
 export class StateBonus {
-  date: number;
+  date: Date;
   stateBonus: number;
   variation: number;
 
   static fromRaw(raw: StateBonusRaw) {
     let instance = new StateBonus();
-    instance.date = raw.date;
+    instance.date = new Date(raw.date);
     instance.stateBonus = raw.stateBonus;
     instance.variation = raw.variation;
+    return instance;
   }
 }
 

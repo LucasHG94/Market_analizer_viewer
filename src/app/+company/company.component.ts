@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ProxyService} from '../proxy.service';
-import {Company} from '../model/index';
+import {Company, StateBonus} from '../model/index';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute} from '@angular/router';
 
@@ -50,20 +50,24 @@ export class CompanyComponent implements OnInit {
   private series: any[];
   private data: any[];
   private seriesName: string[] = [
-    // 'price',
+    'price',
     'difference',
     'percentageDifference',
-    // 'capitalization',
+    'capitalization',
     'BPA',
     'PER',
     'PVC',
     'PCF',
     'dividendYield',
     'interestPerShare',
-    'lastValue'
+    'lastValue',
+    'max',
+    'min',
+    'volume'
   ];
 
   company: Company;
+  stateBonus: StateBonus[];
   constructor (private el: ElementRef, private proxyService: ProxyService, private route: ActivatedRoute) {
   }
 
@@ -75,7 +79,6 @@ export class CompanyComponent implements OnInit {
         this.company = Company.fromRaw(company);
         this.title = this.company.name;
         console.log(this.company);
-        this.loadData();
         let date = new Date();
         Highcharts.setOptions({
           global: {
@@ -92,26 +95,49 @@ export class CompanyComponent implements OnInit {
             }
           }
         });
-        this.initGraph();
+        this.proxyService.getStateBonus().then(stateBonus => {
+          this.stateBonus = stateBonus.map(StateBonus.fromRaw);
+          console.log(stateBonus);
+          this.loadData();
+          this.initGraph();
+        });
       });
     });
   }
 
   loadData() {
     this.data = [];
+    let stateBonusData = [];
     for (let name of this.seriesName){
       this.data.push([]);
       for (let dailyData of this.company.dailyData){
         this.data[this.data.length - 1].push([dailyData.date.getTime(), dailyData[name]]);
       }
     }
+    for (let stateB of this.stateBonus){
+      stateBonusData.push([stateB.date.getTime(), stateB.stateBonus]);
+    }
     this.series = [];
     for (let i = 0; i < this.data.length; i++) {
-      this.series.push({
-        name: this.seriesName[i],
-        data: this.data[i]
-      });
+      if (this.seriesName[i] !== 'BPA' && this.seriesName[i] !== 'PER') {
+        this.series.push({
+          name: this.seriesName[i],
+          data: this.data[i],
+          visible: false
+        });
+      } else {
+        this.series.push({
+          name: this.seriesName[i],
+          data: this.data[i],
+          visible: true
+        });
+      }
     }
+    this.series.push({
+      name: 'Sate Bonus',
+      data: stateBonusData,
+      visible: true
+    });
     console.log(this.series);
   }
 

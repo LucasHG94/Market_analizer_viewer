@@ -19,7 +19,7 @@
         <a href="#">
           <i class="fa fa-line-chart"></i> <span>Bolsa Española</span>
         </a>
-        <ul *ngIf="BME" class="treeview-menu" style="display: block;">
+        <ul *ngIf="BME" class="treeview-menu">
           <li *ngFor="let company of BME">
             <a [routerLink]="['/company', company.id]" routerLinkActive="active">
               <i class="fa fa-circle-o"></i>{{company.name}}
