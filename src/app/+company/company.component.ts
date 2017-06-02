@@ -102,7 +102,7 @@ export class CompanyComponent implements OnInit {
     for (let name of this.seriesName){
       this.data.push([]);
       for (let dailyData of this.company.dailyData){
-        this.data[this.data.length - 1].push([dailyData.date.getTime() * 1000, dailyData[name]]);
+        this.data[this.data.length - 1].push([dailyData.date.getTime(), dailyData[name]]);
       }
     }
     this.series = [];
@@ -121,24 +121,17 @@ export class CompanyComponent implements OnInit {
 
     this.chart = $chartEl.highcharts({
       chart: {
-        type: 'spline',
-        zoomType: 'x',
-        events: {
-          // load: function (event) {
-          //   that.loading = false;
-          // }
-        }
+        type: 'line',
+        zoomType: 'x'
       },
       title: {
         text: 'Datos generales',
-        x: -20 // center
+        // x: -20
       },
       xAxis: {
-        // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         type: 'datetime',
-        dateTimeLabelFormats: { // don't display the dummy year
-          month: '%e. %b',
-          year: '%b'
+        dateTimeLabelFormats: {
+          day: '%e %b',
         },
         title: {
           text: 'Fecha'
@@ -151,14 +144,13 @@ export class CompanyComponent implements OnInit {
       },
       tooltip: {
         shared: true,
-        crosshairs: true
+        crosshairs: true,
+        dateTimeLabelFormats: {
+          day: '%e %b',
+        }
       },
       legend: {
-        enable: true,
-        // layout: 'vertical',
-        // align: 'right',
-        // verticalAlign: 'middle',
-        // borderWidth: 0
+        enable: false,
       },
       series: this.series
     });
