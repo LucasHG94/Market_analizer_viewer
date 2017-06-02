@@ -95,6 +95,9 @@ export interface DailyDataRaw {
   dividendYield: number;
   interestPerShare: number;
   lastValue: number;
+  min: number;
+  max: number;
+  volume: number;
 }
 
 export class DailyData {
@@ -112,6 +115,9 @@ export class DailyData {
   dividendYield: number;
   interestPerShare: number;
   lastValue: number;
+  min: number;
+  max: number;
+  volume: number;
 
   static fromRaw(raw: DailyDataRaw) {
     let instance = new DailyData();
@@ -129,6 +135,9 @@ export class DailyData {
     instance.dividendYield = raw.dividendYield;
     instance.interestPerShare = raw.interestPerShare;
     instance.lastValue = raw.lastValue;
+    instance.min = raw.min;
+    instance.max = raw.max;
+    instance.volume = raw.volume;
     return instance;
   }
 }
