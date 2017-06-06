@@ -21,8 +21,8 @@ export class ProxyService {
     return Promise.reject(error.message || error);
   }
 
-    getStateBonus(): Promise<StateBonusRaw[]> {
-        return this.http.get(this.URL + 'getStateBonus')
+    getStateBonus(from: number, to: number): Promise<StateBonusRaw[]> {
+        return this.http.get(this.URL + 'getStateBonus/' + from + '/' + to)
             .toPromise()
             .then(response => {
                 let res: Response = response.json();
@@ -60,8 +60,8 @@ export class ProxyService {
             }).catch(this.handleError);
     }
 
-  getCompanyData(companyId: number): Promise<CompanyRaw> {
-    return this.http.get(this.URL + 'getCompanyData/' + companyId)
+  getCompanyData(companyId: number, from: number, to: number): Promise<CompanyRaw> {
+    return this.http.get(this.URL + 'getCompanyData/' + companyId + '/' + from + '/' + to)
         .toPromise()
         .then(response => {
           let res: Response = response.json();

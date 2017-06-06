@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, OnInit} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Company, StateBonus} from '../model/index';
 import {Subscription} from 'rxjs/Subscription';
@@ -42,9 +42,12 @@ export interface ChartSeries {
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.css']
 })
-export class CompanyComponent implements OnInit {
+export class CompanyComponent implements OnInit, AfterContentInit {
   private routeSub: Subscription;
-
+  private companyId: number;
+  private from: Date;
+  private to: Date;
+  private rangeSelected: boolean = false;
   private title: string;
   private chart: any;
   private series: any[];
@@ -72,36 +75,60 @@ export class CompanyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.to = new Date();
+    this.from = new Date();
+    this.from.setMonth(this.to.getMonth() - 1);
     this.routeSub = this.route.params.subscribe(params => {
-      let companyId = +params['companyId'];
-      console.log(companyId);
-      this.proxyService.getCompanyData(companyId).then(company => {
-        this.company = Company.fromRaw(company);
-        this.title = this.company.name;
-        console.log(this.company);
-        let date = new Date();
-        Highcharts.setOptions({
-          global: {
-            getTimezoneOffset: date.getTimezoneOffset.bind(date)
+      this.companyId = +params['companyId'];
+      this.updateView();
+    });
+  }
+
+  ngAfterContentInit() {
+    let that = this;
+    let el = this.el.nativeElement;
+    jQuery(() => {
+      jQuery(el).find('#reservation').daterangepicker(
+        {
+          locale: {
+            format: 'DD-MM-YYYY'
           },
-          credits: {
-            enabled: false
-          },
-          chart: {
-            resetZoomButton: {
-              position: {
-                // y: -40
-              }
+          startDate: this.from.getDate() + '-' + (this.from.getMonth() + 1) + '-' + this.from.getFullYear(),
+          endDate: this.to.getDate() + '-' + (this.to.getMonth() + 1) + '-' + this.to.getFullYear()
+        },
+        function (start: Date, end: Date, label: any) {
+          that.from = new Date(start);
+          that.to = new Date(end);
+          that.updateView();
+        });
+    });
+  }
+
+  private updateView() {
+    this.proxyService.getCompanyData(this.companyId, this.from.getTime(), this.to.getTime()).then(company => {
+      this.company = Company.fromRaw(company);
+      this.title = this.company.name;
+      let date = new Date();
+      Highcharts.setOptions({
+        global: {
+          getTimezoneOffset: date.getTimezoneOffset.bind(date)
+        },
+        credits: {
+          enabled: false
+        },
+        chart: {
+          resetZoomButton: {
+            position: {
+              // y: -40
             }
           }
-        });
-        this.proxyService.getStateBonus().then(stateBonus => {
-          this.stateBonus = stateBonus.map(StateBonus.fromRaw);
-          this.stateBonus.sort(function(a, b){return a.date.getTime() - b.date.getTime()});
-          console.log(stateBonus);
-          this.loadData();
-          this.initGraph();
-        });
+        }
+      });
+      this.proxyService.getStateBonus(this.from.getTime(), this.to.getTime()).then(stateBonus => {
+        this.stateBonus = stateBonus.map(StateBonus.fromRaw);
+        this.stateBonus.sort(function(a, b){return a.date.getTime() - b.date.getTime(); });
+        this.loadData();
+        this.initGraph();
       });
     });
   }
@@ -139,7 +166,6 @@ export class CompanyComponent implements OnInit {
       data: stateBonusData,
       visible: true
     });
-    console.log(this.series);
   }
 
   initGraph() {
@@ -183,5 +209,38 @@ export class CompanyComponent implements OnInit {
     });
 
     this.chart = $chartEl.highcharts();
+  }
+
+  formatRange(from: Date, to: Date) {
+    let range: string;
+    range = from.getDate() + '-' + (from.getMonth() + 1) + '-' + from.getFullYear();
+    range += ', ';
+    range += to.getDate() + '-' + (to.getMonth() + 1) + '-' + to.getFullYear();
+    return range;
+  }
+
+  private radioChange(option: number) {
+    switch (option) {
+      case 1:
+        this.to = new Date();
+        this.from = new Date();
+        this.from.setMonth(this.to.getMonth() - 1);
+        this.rangeSelected = false;
+        this.updateView();
+        break;
+      case 2:
+        this.to = new Date();
+        this.from = new Date();
+        this.from.setMonth(this.to.getMonth() - 3);
+        this.rangeSelected = false;
+        this.updateView();
+        break;
+      case 3:
+        this.rangeSelected = true;
+        this.updateView();
+        break;
+      default:
+        this.updateView();
+    }
   }
 }
