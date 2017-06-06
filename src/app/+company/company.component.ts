@@ -97,6 +97,7 @@ export class CompanyComponent implements OnInit {
         });
         this.proxyService.getStateBonus().then(stateBonus => {
           this.stateBonus = stateBonus.map(StateBonus.fromRaw);
+          this.stateBonus.sort(function(a, b){return a.date.getTime() - b.date.getTime()});
           console.log(stateBonus);
           this.loadData();
           this.initGraph();
