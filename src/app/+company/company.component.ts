@@ -23,7 +23,6 @@ export class CompanyComponent implements OnInit {
     this.routeSub = this.route.params.subscribe(params => {
       this.companyId = +params['companyId'];
       this.companyName = params['companyName'];
-      console.log(this.companyName);
     });
   }
 

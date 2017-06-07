@@ -73,7 +73,6 @@ export class ChartFundamentalComponent implements OnInit, AfterContentInit {
   private updateView() {
     this.proxyService.getCompanyData(this.companyId, this.from.getTime(), this.to.getTime()).then(company => {
       this.company = Company.fromRaw(company);
-      console.log(this.company);
       this.title = this.company.name;
       let date = new Date();
       Highcharts.setOptions({
