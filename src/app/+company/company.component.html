@@ -1,28 +1,48 @@
-<div *ngIf="company">
-  <h3 align="center">{{company.name}}</h3>
+<div *ngIf="companyName">
+  <h3 align="center">{{companyName}}</h3>
 </div>
 
-<div class="row" style="margin: 30px">
-  <div class="col-xs-6">
-    <form>
-      <div class="btn-group">
-        <button type="button" name="optradio" class="btn btn-default" (click)="radioChange(1)" [class.active]="optionSelected === 1">Último mes</button>
-        <button type="button" name="optradio" class="btn btn-default" (click)="radioChange(2)" [class.active]="optionSelected === 2">Últimos tres meses</button>
-        <button type="button" name="optradio" class="btn btn-default" (click)="radioChange(3)" [class.active]="optionSelected === 3">Rango</button>
-      </div>
-    </form>
-  </div>
-  <div class="col-xs-6">
-    <div class="form-group pull-right">
-      <!--<label for="range">Rango:</label>-->
-      <div class="input-group">
-        <div class="input-group-addon">
-          <i class="fa fa-calendar"></i>
+<div *ngIf="companyId" class="row">
+  <div class="col-xs-12">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#tab_fundamental" data-toggle="tab" aria-expanded="true" (click)="reflowCharts()">Análisis fundamental</a>
+        </li>
+        <li class="">
+          <a href="#tab_candle" data-toggle="tab" aria-expanded="false" (click)="reflowCharts()">Gráfico de velas</a>
+        </li>
+        <li class="">
+          <a href="#tab_technical" data-toggle="tab" aria-expanded="false" (click)="reflowCharts()">Análisis técnico</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_fundamental">
+          <div class="row">
+            <div class="col-xs-12">
+              <app-chart-fundamental [companyId]="companyId"></app-chart-fundamental>
+            </div>
+          </div>
         </div>
-        <input type="text" [disabled]="!rangeSelected" class="form-control pull-right" id="reservation" [value]="formatRange(from, to)">
+
+        <div class="tab-pane" id="tab_candle">
+          <div class="row">
+            <div class="col-xs-12">
+              <app-chart-candlestick [companyId]="companyId"></app-chart-candlestick>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="tab_technical">
+          <div class="row">
+            <div class="col-xs-12">
+              <app-chart-technical [companyId]="companyId"></app-chart-technical>
+            </div>
+          </div>
+        </div>
       </div>
-  </div>
+      <!-- /.tab-content -->
+    </div>
   </div>
 </div>
 
-<div class="chart"></div>
