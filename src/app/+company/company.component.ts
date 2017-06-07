@@ -45,6 +45,7 @@ export interface ChartSeries {
 export class CompanyComponent implements OnInit, AfterContentInit {
   private routeSub: Subscription;
   private companyId: number;
+  private optionSelected: number = 1;
   private from: Date;
   private to: Date;
   private rangeSelected: boolean = false;
@@ -222,6 +223,7 @@ export class CompanyComponent implements OnInit, AfterContentInit {
   private radioChange(option: number) {
     switch (option) {
       case 1:
+        this.optionSelected = 1;
         this.to = new Date();
         this.from = new Date();
         this.from.setMonth(this.to.getMonth() - 1);
@@ -229,6 +231,7 @@ export class CompanyComponent implements OnInit, AfterContentInit {
         this.updateView();
         break;
       case 2:
+        this.optionSelected = 2;
         this.to = new Date();
         this.from = new Date();
         this.from.setMonth(this.to.getMonth() - 3);
@@ -236,6 +239,7 @@ export class CompanyComponent implements OnInit, AfterContentInit {
         this.updateView();
         break;
       case 3:
+        this.optionSelected = 3;
         this.rangeSelected = true;
         this.updateView();
         break;

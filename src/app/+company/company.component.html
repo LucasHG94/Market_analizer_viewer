@@ -2,24 +2,18 @@
   <h3 align="center">{{company.name}}</h3>
 </div>
 
-<div class="row">
+<div class="row" style="margin: 30px">
   <div class="col-xs-6">
     <form>
-      <div class="row">
-        <div class="radio" class="col-xs-4">
-          <label><input type="radio" name="optradio" (click)="radioChange(1)" checked="checked">Último mes</label>
-        </div>
-        <div class="radio" class="col-xs-4">
-          <label><input type="radio" name="optradio" (click)="radioChange(2)">Últimos tres meses</label>
-        </div>
-        <div class="radio" class="col-xs-4">
-          <label><input type="radio" name="optradio" (click)="radioChange(3)">Rango</label>
-        </div>
+      <div class="btn-group">
+        <button type="button" name="optradio" class="btn btn-default" (click)="radioChange(1)" [class.active]="optionSelected === 1">Último mes</button>
+        <button type="button" name="optradio" class="btn btn-default" (click)="radioChange(2)" [class.active]="optionSelected === 2">Últimos tres meses</button>
+        <button type="button" name="optradio" class="btn btn-default" (click)="radioChange(3)" [class.active]="optionSelected === 3">Rango</button>
       </div>
     </form>
   </div>
   <div class="col-xs-6">
-    <div class="form-group">
+    <div class="form-group pull-right">
       <!--<label for="range">Rango:</label>-->
       <div class="input-group">
         <div class="input-group-addon">
