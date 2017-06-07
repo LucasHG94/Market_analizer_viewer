@@ -6,6 +6,9 @@ import { AppComponent }  from './app.component';
 import {MainHeaderComponent} from './main-header/main-header.component';
 import {MainSidebarComponent} from './main-sidebar/main-sidebar.component';
 import {CompanyComponent} from './+company/company.component';
+import {ChartFundamentalComponent} from './chart-fundamental/chart-fundamental.coponent';
+import {ChartCandlestickComponent} from './chart-candlestick/chart-candlestick.component';
+import {ChartTechnicalComponent} from './chart-technical/chart-technical.component';
 import {CommonModule} from '@angular/common';
 import {HttpModule, JsonpModule} from '@angular/http';
 import {ProxyService} from './proxy.service';
@@ -18,7 +21,10 @@ import {appConfig} from './config/app.config';
     AppComponent,
     MainHeaderComponent,
     MainSidebarComponent,
-    CompanyComponent
+    CompanyComponent,
+    ChartFundamentalComponent,
+    ChartCandlestickComponent,
+    ChartTechnicalComponent
   ],
   imports: [
     BrowserModule,
