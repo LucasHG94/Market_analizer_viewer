@@ -9,7 +9,7 @@
         </a>
         <ul *ngIf="IBEX35" class="treeview-menu" style="display: block;">
           <li *ngFor="let company of IBEX35">
-            <a [routerLink]="['/company', company.id]" routerLinkActive="active">
+            <a [routerLink]="['/company', company.id, company.name]" routerLinkActive="active">
               <i class="fa fa-circle-o"></i>{{company.name}}
             </a>
           </li>
@@ -21,7 +21,7 @@
         </a>
         <ul *ngIf="BME" class="treeview-menu">
           <li *ngFor="let company of BME">
-            <a [routerLink]="['/company', company.id]" routerLinkActive="active">
+            <a [routerLink]="['/company', company.id, company.name]" routerLinkActive="active">
               <i class="fa fa-circle-o"></i>{{company.name}}
             </a>
           </li>
