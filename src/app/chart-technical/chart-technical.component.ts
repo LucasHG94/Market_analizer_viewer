@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Company} from '../model/index';
 import {ActivatedRoute} from '@angular/router';
@@ -11,7 +11,7 @@ declare var jQuery: any;
   templateUrl: './chart-technical.component.html',
   styleUrls: ['./chart-technical.component.css']
 })
-export class ChartTechnicalComponent {
+export class ChartTechnicalComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() companyId: number;
   private optionSelected: number = 1;
   private from: Date;
@@ -22,9 +22,9 @@ export class ChartTechnicalComponent {
   private series: any[];
   private data: any[];
   private seriesName: string[] = [
-    'PCF',
-    'max',
-    'min'
+    'price',
+    'movingAverageFive',
+    'movingAverageTen'
   ];
 
   company: Company;
@@ -56,6 +56,12 @@ export class ChartTechnicalComponent {
           that.updateView();
         });
     });
+  }
+
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    if (changes['companyId'] && changes['companyId'].currentValue) {
+      this.ngOnInit();
+    }
   }
 
   private updateView() {

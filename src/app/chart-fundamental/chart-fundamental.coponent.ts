@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Company, StateBonus} from '../model/index';
 import {ActivatedRoute} from '@angular/router';
@@ -11,7 +11,7 @@ declare var jQuery: any;
   templateUrl: './chart-fundamental.component.html',
   styleUrls: ['./chart-fundamental.component.css']
 })
-export class ChartFundamentalComponent implements OnInit, AfterContentInit {
+export class ChartFundamentalComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() companyId: number;
   private optionSelected: number = 1;
   private from: Date;
@@ -25,7 +25,7 @@ export class ChartFundamentalComponent implements OnInit, AfterContentInit {
     'price',
     'difference',
     'percentageDifference',
-    'capitalization',
+    // 'capitalization',
     'BPA',
     'PER',
     'PVC',
@@ -68,6 +68,12 @@ export class ChartFundamentalComponent implements OnInit, AfterContentInit {
           that.updateView();
         });
     });
+  }
+
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    if (changes['companyId'] && changes['companyId'].currentValue) {
+      this.ngOnInit();
+    }
   }
 
   private updateView() {
