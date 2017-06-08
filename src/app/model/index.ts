@@ -99,6 +99,9 @@ export interface DailyDataRaw {
   min: number;
   max: number;
   volume: number;
+  movingAverageFive: number;
+  movingAverageTen: number;
+  action: string;
 }
 
 export class DailyData {
@@ -119,6 +122,9 @@ export class DailyData {
   min: number;
   max: number;
   volume: number;
+  movingAverageFive: number;
+  movingAverageTen: number;
+  action: string;
 
   static fromRaw(raw: DailyDataRaw) {
     let instance = new DailyData();
@@ -139,6 +145,9 @@ export class DailyData {
     instance.min = raw.min;
     instance.max = raw.max;
     instance.volume = raw.volume;
+    instance.movingAverageFive = raw.movingAverageFive;
+    instance.movingAverageTen = raw.movingAverageTen;
+    instance.action = raw.action;
     return instance;
   }
 }
