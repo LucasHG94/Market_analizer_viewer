@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Company} from '../model/index';
 import {ActivatedRoute} from '@angular/router';
@@ -11,7 +11,7 @@ declare var jQuery: any;
   templateUrl: './chart-candlestick.component.html',
   styleUrls: ['./chart-candlestick.component.css']
 })
-export class ChartCandlestickComponent implements OnInit, AfterContentInit {
+export class ChartCandlestickComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() companyId: number;
   private optionSelected: number = 1;
   private from: Date;
@@ -54,6 +54,12 @@ export class ChartCandlestickComponent implements OnInit, AfterContentInit {
     });
   }
 
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    if (changes['companyId'] && changes['companyId'].currentValue) {
+      this.ngOnInit();
+    }
+  }
+
   private updateView() {
     this.proxyService.getCompanyData(this.companyId, this.from.getTime(), this.to.getTime()).then(company => {
       this.company = Company.fromRaw(company);
@@ -83,7 +89,7 @@ export class ChartCandlestickComponent implements OnInit, AfterContentInit {
     this.data = [];
     this.data.push([]);
     for (let dailyData of this.company.dailyData){
-      this.data[this.data.length - 1].push([dailyData.date.getTime(), dailyData['PCF']]);
+      this.data[this.data.length - 1].push([dailyData.date.getTime(), dailyData['price']]);
     }
     this.errorData = [];
     this.errorData.push([]);
@@ -93,7 +99,7 @@ export class ChartCandlestickComponent implements OnInit, AfterContentInit {
     this.series = [];
     for (let i = 0; i < this.data.length; i++) {
       this.series.push({
-        name: 'PCF',
+        name: 'Precio',
         type: 'column',
         data: this.data[i]
       });
@@ -101,11 +107,11 @@ export class ChartCandlestickComponent implements OnInit, AfterContentInit {
     for (let i = 0; i < this.errorData.length; i++) {
       this.series.push({
         name: 'Mínimo y máximo',
-        type: 'errorbar',
+        type: 'line',
         data: this.errorData[i]
       });
     }
-    console.log(this.series);
+    // data: [[48, 51], [68, 73], [92, 110], [128, 136], [204, 220], [189, 199], [95, 110], [52, 56]]
   }
 
   initGraph() {
