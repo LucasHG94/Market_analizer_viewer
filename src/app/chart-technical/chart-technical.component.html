@@ -22,3 +22,18 @@
 </div>
 
 <div class="chart"></div>
+
+<div *ngIf="company">
+    <div *ngIf="company.dailyData[company.dailyData.length - 1].action === 'buy'">
+        <span>Comprar</span>
+        <i class="fa fa-shopping-cart"></i>
+    </div>
+    <div *ngIf="company.dailyData[company.dailyData.length - 1].action === 'sell'">
+        <span>Vender</span>
+        <i class="fa fa-money"></i>
+    </div>
+    <div *ngIf="company.dailyData[company.dailyData.length - 1].action === 'wait'">
+        <span>Esperar</span>
+        <i class="fa fa-coffee"></i>
+    </div>
+</div>

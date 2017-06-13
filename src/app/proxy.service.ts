@@ -73,4 +73,17 @@ export class ProxyService {
         }).catch(this.handleError);
   }
 
+  getLastData(): Promise<any[]> {
+    return this.http.get(this.URL + 'getLastData')
+      .toPromise()
+      .then(response => {
+        let res: Response = response.json();
+        if (res.success) {
+          return res.data;
+        } else {
+          return ProxyService.buildRejectMessage(res);
+        }
+      }).catch(this.handleError);
+  }
+
 }

@@ -15,6 +15,7 @@ import {ProxyService} from './proxy.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppConfig} from './model/index';
 import {appConfig} from './config/app.config';
+import {SummaryComponent} from './+summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {appConfig} from './config/app.config';
     CompanyComponent,
     ChartFundamentalComponent,
     ChartCandlestickComponent,
-    ChartTechnicalComponent
+    ChartTechnicalComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
