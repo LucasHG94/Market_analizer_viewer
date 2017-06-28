@@ -34,3 +34,19 @@
     </ul>
   </div>
 </aside><!-- /.main-sidebar -->
+
+<div class="modal fade" id="managerModal" tabindex="-1" role="dialog" aria-labelledby="managerModalLabel" #managerModal>
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align:center;">
+          Clave de acceso: <input type="text" [(ngModel)]="password">
+      </div>
+      <div class="modal-footer">
+        <div>
+          <button type="button" class="btn btn-primary btn-action btn-sm" title="Acceder"
+                  (click)="access()">Acceder
+          </button>
+        </div>
+      </div>
+    </div>
+</div>
