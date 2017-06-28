@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms'; // <-- NgModel lives here
 
 import { AppComponent }  from './app.component';
-import {MainHeaderComponent} from './main-header/main-header.component';
 import {MainSidebarComponent} from './main-sidebar/main-sidebar.component';
 import {CompanyComponent} from './+company/company.component';
 import {ChartFundamentalComponent} from './chart-fundamental/chart-fundamental.coponent';
@@ -20,7 +19,6 @@ import {SummaryComponent} from './+summary/summary.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MainHeaderComponent,
     MainSidebarComponent,
     CompanyComponent,
     ChartFundamentalComponent,
