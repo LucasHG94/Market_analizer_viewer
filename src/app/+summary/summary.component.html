@@ -33,10 +33,10 @@
             <td>{{data.lastData.max}}</td>
             <td>{{data.lastData.volume}}</td>
             <td>
-                <div *ngIf="data.lastData.action === 'buy'">
+                <div *ngIf="data.lastData.action === 'buy'" title="Comprar">
                     <i class="fa fa-shopping-cart"></i>
                 </div>
-                <div *ngIf="data.lastData.action === 'sell'">
+                <div *ngIf="data.lastData.action === 'sell'" title="Vender">
                     <i class="fa fa-money"></i>
                 </div>
                 <!--<div *ngIf="data.lastData.action === 'wait'">-->
