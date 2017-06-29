@@ -4,22 +4,26 @@ import 'rxjs/add/operator/map';
 export interface IAppConfig {
   host: string;
   port: number;
+  password: string;
 }
 
 export var DefaultAppConfig: IAppConfig = {
     host: '0.0.0.0',
-    port: 5000
+    port: 5000,
+    password: '123'
 };
 
 export class AppConfig implements IAppConfig {
   host: string;
   port: number;
+  password: string;
 
   static fromRaw(raw: IAppConfig) {
     let config = new AppConfig();
     config = {
       host: raw.host,
-      port: raw.port
+      port: raw.port,
+      password: raw.password
     };
     return config;
   }

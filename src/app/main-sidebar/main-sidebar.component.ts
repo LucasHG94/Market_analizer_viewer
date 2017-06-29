@@ -1,8 +1,8 @@
-import {AfterViewChecked, Component, ElementRef, } from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, Inject,} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {ProxyService} from '../proxy.service';
 import 'rxjs/add/operator/toPromise';
-import {Company} from '../model/index';
+import {AppConfig, Company} from '../model/index';
 
 declare var jQuery: any;
 
@@ -18,7 +18,7 @@ export class MainSidebarComponent {
   password: string;
   logged: boolean = false;
   sent: boolean = false;
-  constructor (private el: ElementRef, private proxyService: ProxyService) {
+  constructor (private el: ElementRef, private proxyService: ProxyService, @Inject('AppConfig') private appConfig: AppConfig) {
     this.getCompanies();
   }
   getCompanies() {
@@ -45,7 +45,7 @@ export class MainSidebarComponent {
   }
 
   access() {
-    if (this.password === '123') {
+    if (this.password === this.appConfig.password) {
       this.logged = true;
       jQuery(this.el.nativeElement).children('#managerModal').modal('hide');
     } else {
