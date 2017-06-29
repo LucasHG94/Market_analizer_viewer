@@ -25,15 +25,15 @@
 
 <div *ngIf="company">
     <div *ngIf="company.dailyData[company.dailyData.length - 1].action === 'buy'">
-        <span>Comprar</span>
+        <span>Acción recomendada: Comprar</span>
         <i class="fa fa-shopping-cart"></i>
     </div>
     <div *ngIf="company.dailyData[company.dailyData.length - 1].action === 'sell'">
-        <span>Vender</span>
+        <span>Acción recomendada: Vender</span>
         <i class="fa fa-money"></i>
     </div>
     <div *ngIf="company.dailyData[company.dailyData.length - 1].action === 'wait'">
-        <span>Esperar</span>
+        <span>Acción recomendada: Esperar</span>
         <i class="fa fa-coffee"></i>
     </div>
 </div>
