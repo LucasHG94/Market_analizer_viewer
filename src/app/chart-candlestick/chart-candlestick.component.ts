@@ -107,7 +107,7 @@ export class ChartCandlestickComponent implements OnInit, AfterContentInit, OnCh
     for (let i = 0; i < this.errorData.length; i++) {
       this.series.push({
         name: 'Mínimo y máximo',
-        type: 'line',
+        type: 'errorbar',
         data: this.errorData[i]
       });
     }
