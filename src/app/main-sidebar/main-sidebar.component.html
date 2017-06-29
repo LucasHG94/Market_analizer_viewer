@@ -39,7 +39,8 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body" style="text-align:center;">
-          Clave de acceso: <input type="text" [(ngModel)]="password">
+          Clave de acceso: <input type="password" [(ngModel)]="password">
+        <div *ngIf="sent" style="color: red">Clave de acceso incorrecta</div>
       </div>
       <div class="modal-footer">
         <div>

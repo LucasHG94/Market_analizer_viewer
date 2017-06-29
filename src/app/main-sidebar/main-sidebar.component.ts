@@ -17,6 +17,7 @@ export class MainSidebarComponent {
   BME: Company[];
   password: string;
   logged: boolean = false;
+  sent: boolean = false;
   constructor (private el: ElementRef, private proxyService: ProxyService) {
     this.getCompanies();
   }
@@ -47,6 +48,8 @@ export class MainSidebarComponent {
     if (this.password === '123') {
       this.logged = true;
       jQuery(this.el.nativeElement).children('#managerModal').modal('hide');
+    } else {
+      this.sent = true;
     }
   }
 }
