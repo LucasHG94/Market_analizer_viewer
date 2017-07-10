@@ -1,3 +1,7 @@
+/*
+  Component corresponding to the company detail.
+ */
+
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Subscription} from 'rxjs/Subscription';

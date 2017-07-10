@@ -1,3 +1,7 @@
+/*
+  Component corresponding to the summary of all the companies.
+ */
+
 import {AfterViewChecked, Component, ElementRef, OnInit} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 

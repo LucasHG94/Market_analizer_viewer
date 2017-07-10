@@ -1,3 +1,7 @@
+/*
+  Component corresponding to the graphic of candles.
+ */
+
 import {AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Company} from '../model/index';

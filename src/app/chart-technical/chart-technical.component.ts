@@ -1,3 +1,8 @@
+/*
+  Compomente corresponding to the technical analysis, contains a graph with moving averages and price.
+  Also shows the action to be taken.
+ */
+
 import {AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Company} from '../model/index';

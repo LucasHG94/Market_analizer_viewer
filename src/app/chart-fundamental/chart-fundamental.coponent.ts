@@ -1,3 +1,7 @@
+/*
+  Compomente corresponding to the fundamental analysis, contains a graph with all the daily data of the company.
+ */
+
 import {AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {ProxyService} from '../proxy.service';
 import {Company, StateBonus} from '../model/index';

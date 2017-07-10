@@ -1,4 +1,8 @@
-import {AfterViewChecked, Component, ElementRef, Inject,} from '@angular/core';
+/*
+ Compomente corresponding to the sidebar with a menu with all the companies.
+ */
+
+import {Component, ElementRef, Inject} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {ProxyService} from '../proxy.service';
 import 'rxjs/add/operator/toPromise';
