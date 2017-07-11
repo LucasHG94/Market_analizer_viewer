@@ -36,7 +36,6 @@ export class ChartFundamentalComponent implements OnInit, AfterContentInit, OnCh
     'PCF',
     'dividendYield',
     'interestPerShare',
-    'lastValue',
     'max',
     'min',
     'volume'

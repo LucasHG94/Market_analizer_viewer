@@ -99,7 +99,6 @@ export interface DailyDataRaw {
   PCF: number;
   dividendYield: number;
   interestPerShare: number;
-  lastValue: number;
   min: number;
   max: number;
   volume: number;
@@ -122,7 +121,6 @@ export class DailyData {
   PCF: number;
   dividendYield: number;
   interestPerShare: number;
-  lastValue: number;
   min: number;
   max: number;
   volume: number;
@@ -145,7 +143,6 @@ export class DailyData {
     instance.PCF = raw.PCF;
     instance.dividendYield = raw.dividendYield;
     instance.interestPerShare = raw.interestPerShare;
-    instance.lastValue = raw.lastValue;
     instance.min = raw.min;
     instance.max = raw.max;
     instance.volume = raw.volume;
