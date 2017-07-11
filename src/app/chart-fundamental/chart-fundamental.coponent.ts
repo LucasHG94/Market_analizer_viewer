@@ -122,7 +122,7 @@ export class ChartFundamentalComponent implements OnInit, AfterContentInit, OnCh
     }
     this.series = [];
     for (let i = 0; i < this.data.length; i++) {
-      if (this.seriesName[i] !== 'BPA' && this.seriesName[i] !== 'PER') {
+      if (this.seriesName[i] !== 'price') {
         this.series.push({
           name: this.seriesName[i],
           data: this.data[i],
